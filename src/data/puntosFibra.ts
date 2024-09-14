@@ -1,0 +1,161 @@
+import { FibraLocation } from "../types";
+
+export const puntosFibra: FibraLocation[] = [
+    {
+        id: 1,
+        name: "Consuelo",
+        lat: 18.5562031,
+        lng: -69.3116397,
+    },
+    {
+        id: 2,
+        name: "Quisqueya",
+        lat:18.5544847,
+        lng: -69.4144751,
+    },
+    {
+        id: 3,
+        name: "Ramon Santana",
+        lat: 18.5186376,
+        lng: -84.087502,
+    },
+    {
+        id: 4,
+        name: "Batey la Cubana",
+        lat: 18.5186376,
+        lng: -69.2122589,
+    },
+    {
+        id: 5,
+        name: "Batey Monte Cristi",
+        lat: 18.5091565,
+        lng: -69.2456246,
+    },
+    {
+        id: 6,
+        name: "Batey La Balsa",
+        lat: 18.5164402,
+        lng: -69.215554,
+    },
+    {
+        id: 7,
+        name: "Batey Nuevo",
+        lat: 18.7129391,
+        lng: -69.942956,
+    },
+    {
+        id: 8,
+        name: "El Soco",
+        lat: 18.4475984,
+        lng: -69.1976468,
+    },
+    {
+        id: 11,
+        name: "Punta Garza",
+        lat: 18.4714373,
+        lng: -69.3407728,
+    },
+    {
+        id: 12,
+        name: "Punta Pescadora",
+        lat: 18.4547035,
+        lng: -69.3275174,
+    },
+    {
+        id: 13,
+        name: "Altos de Abraham",
+        lat: 18.4778727,
+        lng: -69.3121423,
+    },
+    {
+        id: 14,
+        name: "Altos de San Pedro",
+        lat: 18.4608075,
+        lng: -69.3393046,
+    },
+    {
+        id: 15,
+        name: "Paraiso San Pedro",
+        lat: 18.4789797,
+        lng: -69.3133976,
+    },
+    {
+        id: 16,
+        name: "Villa Olímpica",
+        lat: 18.4709864,
+        lng: -69.2931907,
+    },
+    {
+        id: 17,
+        name: "El Invi",
+        lat: 18.5490159,
+        lng: -69.2955899,
+    },
+    {
+        id: 18,
+        name: "Palo de Azúcar",
+        lat: 18.4750386,
+        lng: -69.2807586,
+    },
+    {
+        id: 19,
+        name: "Buenos Aires",
+        lat: 18.4750386,
+        lng: -69.2807586,
+    },
+    {
+        id: 20,
+        name: "Residencial Villa Marina",
+        lat: 18.4587919,
+        lng: -69.3122791,
+    },
+    {
+        id: 21,
+        name: "Barrio Enriquillo",
+        lat: 18.4567735,
+        lng: -69.3037936,
+    },
+    {
+        id: 22,
+        name: "Av. Luis Amiama Tió",
+        lat: 18.4592217,
+        lng: 69.2751808,
+    },
+    {
+        id: 23,
+        name: "Res. Centro Español",
+        lat: 18.4864192,
+        lng: -69.3095523,
+    },
+    {
+        id: 24,
+        name: "Residencial Torres",
+        lat: 18.46266,
+        lng: -69.3076983,
+    },
+    {
+        id: 25,
+        name: "Batey Angelina",
+        lat: 18.4618514,
+        lng: -69.2982392,
+    },
+    {
+        id: 26,
+        name: "Batey La Laura",
+        lat: 18.4618514,
+        lng: -69.2982392,
+    },
+    {
+        id: 27,
+        name: "Evangelina Rodríguez",
+        lat: 18.4618514,
+        lng: -69.2982392,
+    },
+    {
+        id: 28,
+        name: "Barrio México",
+        lat: 18.4618514,
+        lng: -69.2982392,
+    },
+    
+]
