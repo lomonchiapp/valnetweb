@@ -48,7 +48,7 @@ const InternetSubmenu = () => (
         >
           <div className="text-sm font-medium leading-none">Residencial</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            High-speed internet for your home
+            Internet de alta velocidad sin restricciones.
           </p>
         </a>
       </NavigationMenuLink>
@@ -61,7 +61,7 @@ const InternetSubmenu = () => (
         >
           <div className="text-sm font-medium leading-none">Negocios</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            Reliable internet solutions for your business
+            Soluciones confiables para tu negocio
           </p>
         </a>
       </NavigationMenuLink>
