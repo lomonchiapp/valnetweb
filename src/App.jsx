@@ -12,6 +12,7 @@ function App() {
   const styles  = {
     supportButton: {
       position: 'fixed',
+      flexDirection:'row',
       right: -88,
       zIndex: 1000,
       top: '50%',
