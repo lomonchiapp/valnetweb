@@ -6,10 +6,10 @@ import { Grid2 } from "@mui/material";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+import 'swiper/css/effect-fade';
 import "swiper/css/autoplay";
 // import required modules
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Pagination, Navigation, Autoplay, EffectFade } from "swiper/modules";
 
 // Import Component
 import { FamiliaConectada } from "./FamiliaConectada";
@@ -66,7 +66,7 @@ export const Slideshow = () => {
     <Grid2 container sx={styles.Slider}>
       <Grid2 item size={12}>
         <Swiper
-          modules={[Pagination, Navigation, Autoplay]}
+          modules={[Pagination, Navigation, Autoplay, EffectFade]}
           spaceBetween={0}
           effect={'fade'}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
@@ -80,19 +80,24 @@ export const Slideshow = () => {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          <SwiperSlide>
-          <FamiliaConectada/>
-          </SwiperSlide>
+          
           <SwiperSlide>
           <PlanConectao/>
+          </SwiperSlide>
+          <SwiperSlide>
+          <PlanEstudio/>
           </SwiperSlide>
           <SwiperSlide>
           <PlanCinematica/>
           </SwiperSlide>
           <SwiperSlide>
-          <PlanEstudio/>
+          <FamiliaConectada/>
           </SwiperSlide>
-
+          
+          {/* Add more slides here */}
+          
+          {/* Progress Circle */}
+         
           <div ref={progressCircle} style={styles.progressCircle}>
             <div ref={progressContent}></div>
           </div>

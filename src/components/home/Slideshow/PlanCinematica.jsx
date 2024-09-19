@@ -21,7 +21,7 @@ export const PlanCinematica = () => {
       backgroundImage: "url('/slideshow/planCinematica/bg.jpg')",
       flexDirection: "column",
       justifyContent: "center",
-      alignItems: "flex-end",
+      alignItems: "flex-start",
       height: 600,
       pt: 15,
       backgroundSize: "cover",
@@ -30,7 +30,7 @@ export const PlanCinematica = () => {
     },
     header: {
       zIndex: 30,
-      paddingRight: 15,
+      paddingLeft: 15,
       display: "flex",
       flexDirection: "column",
     },
@@ -73,6 +73,7 @@ export const PlanCinematica = () => {
         backgroundColor: colors.orangeAccent[500],
         p: 1,
         borderRadius: 3,
+        fontWeight: 700,
         ml: 1,
       },
     },
@@ -125,18 +126,18 @@ export const PlanCinematica = () => {
   return (
     <Grid2 container sx={styles.slide}>
       <Grid2 sx={styles.header}>
-        <Typography sx={styles.title}>La tecnología es</Typography>
+        <Typography sx={styles.title}>Contenido HD, sin tiempo de carga.</Typography>
         <motion.div animate={floatingAnimation} style={{ display: "flex" }}>
           <Typography sx={{ ...styles.familia, mb: 1 }}>
-            Para Todos
+            Plan Cinemática
           </Typography>
         </motion.div>
         <Typography sx={styles.text}>
-          Descubre nuestro plan<span>Conectao&apos;, &lsquo;, &#39;, &rsquo;</span>{" "}
+         Obténlo solo por<span style={styles.price}>RD$2550</span>{" "}
         </Typography>
         <Box sx={styles.btnContainer}>
           <Button onClick={() => toggleDrawer()} sx={styles.btnSecondary}>
-            Ver Planes
+            LO QUIERO AHORA
           </Button>
           <Typography sx={styles.helperText}>Impuestos Incluidos.</Typography>
         </Box>

@@ -18,7 +18,7 @@ export const PlanConectao = () => {
 
   const styles = {
     slide: {
-      backgroundImage: "url('/slideshow/planConectao/bgconectao.jpg')",
+      backgroundImage: "url('/slideshow/planConectao/bg.jpg')",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "flex-end",
@@ -58,19 +58,19 @@ export const PlanConectao = () => {
       fontWeight: 900,
       zIndex: 30,
       textShadow:
-        "0 0 10px #8BC9FF, 0 0 20px #8BC9FF, 0 0 30px rgba(0, 0, 255, 0.4)", // Glowing effect
+        "0 0 10px #8bbbff, 0 0 20px #8bbbff, 0 0 30px rgba(0, 0, 255, 0.4)", // Glowing effect
     },
     text: {
       color: 'white',
       fontSize: 18,
-      fontWeight: 500,
+      fontWeight: 800,
       zIndex: 30,
       mt: 1,
       textAlign: "center",
       textShadow: "0 0 10px rgba(0,0,0,0.5)",
       span: {
         color: "white",
-        backgroundColor: colors.orangeAccent[500],
+        backgroundColor: colors.blueAccent[500],
         p: 1,
         borderRadius: 3,
         ml: 1,
@@ -79,7 +79,7 @@ export const PlanConectao = () => {
 
 
     helperText: {
-      color: colors.orangeAccent[500],
+      color: 'white',
       fontSize: 13,
       fontWeight: 500,
       zIndex: 30,
@@ -88,7 +88,7 @@ export const PlanConectao = () => {
       textShadow: "0 0 10px rgba(0,0,0,0.5)",
     },
     btnSecondary: {
-      backgroundColor: colors.orangeAccent[500],
+      backgroundColor: colors.blueAccent[500],
       padding: "0.5rem 2rem",
       color: "white",
       borderRadius: 5,

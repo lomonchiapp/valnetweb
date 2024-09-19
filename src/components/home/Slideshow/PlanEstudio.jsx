@@ -35,10 +35,17 @@ export const PlanEstudio = () => {
       flexDirection: "column",
     },
     title: {
-      color: 'white',
+      color: "white",
       fontSize: 30,
       fontWeight: 700,
       zIndex: 30,
+      textShadow: "0 0 10px rgba(0,0,0,0.5)",
+      textAlign: "center",
+    },
+    subtitle: {
+      color: "white",
+      fontSize: 18,
+      fontWeight: 800,
       textShadow: "0 0 10px rgba(0,0,0,0.5)",
       textAlign: "center",
     },
@@ -50,18 +57,18 @@ export const PlanEstudio = () => {
       zIndex: 30,
     },
     familia: {
-      color: 'white',
-      fontSize: 85,
+      color: "white",
+      fontSize: 100,
       maxWidth: 500,
       textAlign: "center",
-      lineHeight: 1,
+      lineHeight: 0.9,
       fontWeight: 900,
       zIndex: 30,
       textShadow:
         "0 0 10px #8BC9FF, 0 0 20px #8BC9FF, 0 0 30px rgba(0, 0, 255, 0.4)", // Glowing effect
     },
     text: {
-      color: 'white',
+      color: "white",
       fontSize: 18,
       fontWeight: 500,
       zIndex: 30,
@@ -76,7 +83,6 @@ export const PlanEstudio = () => {
         ml: 1,
       },
     },
-
 
     helperText: {
       color: colors.orangeAccent[500],
@@ -125,24 +131,31 @@ export const PlanEstudio = () => {
   return (
     <Grid2 container sx={styles.slide}>
       <Grid2 sx={styles.header}>
-        <Typography sx={styles.title}>La tecnología es</Typography>
-        <motion.div animate={floatingAnimation} style={{ display: "flex" }}>
-          <Typography sx={{ ...styles.familia, mb: 1 }}>
-            Para Todos
-          </Typography>
-        </motion.div>
-        <Typography sx={styles.text}>
-          Descubre nuestro plan<span>Conectao'</span>{" "}
+        <Typography sx={styles.title}>
+          Nosotros con el
         </Typography>
+        <motion.div animate={floatingAnimation} style={{ display: "flex" }}>
+          <Typography sx={{ ...styles.familia, mb: 1 }}>Plan Estudio</Typography>
+        </motion.div>
+        <Grid2 container sx={{ alignContent:'center', justifyContent: "center", display:'flex', flexDirection:'row' }}>
+        <Typography sx={styles.subtitle}>
+          Estamos cumpliendo nuestros sueños...
+        </Typography>
+        </Grid2>
         <Box sx={styles.btnContainer}>
           <Button onClick={() => toggleDrawer()} sx={styles.btnSecondary}>
-            Ver Planes
+            LO QUIERO YA!
           </Button>
           <Typography sx={styles.helperText}>Impuestos Incluidos.</Typography>
         </Box>
       </Grid2>
-      <Drawer sx={styles.drawer} open={isDrawerOpen} onClose={toggleDrawer} anchor="bottom">
-        <Grid2 container sx={{ p: 2, backgroundColor:'lightgrey' }}>
+      <Drawer
+        sx={styles.drawer}
+        open={isDrawerOpen}
+        onClose={toggleDrawer}
+        anchor="bottom"
+      >
+        <Grid2 container sx={{ p: 2, backgroundColor: "lightgrey" }}>
           <Grid2 item size={12}>
             <PlanSwiper plans={planesInternet} />
           </Grid2>
