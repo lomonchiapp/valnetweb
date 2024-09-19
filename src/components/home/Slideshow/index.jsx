@@ -13,6 +13,9 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 // Import Component
 import { FamiliaConectada } from "./FamiliaConectada";
+import { PlanConectao } from "./PlanConectao";
+import { PlanCinematica } from "./PlanCinematica";
+import { PlanEstudio } from "./PlanEstudio";
 
 const styles = {
   Slider: {
@@ -79,6 +82,15 @@ export const Slideshow = () => {
         >
           <SwiperSlide>
           <FamiliaConectada/>
+          </SwiperSlide>
+          <SwiperSlide>
+          <PlanConectao/>
+          </SwiperSlide>
+          <SwiperSlide>
+          <PlanCinematica/>
+          </SwiperSlide>
+          <SwiperSlide>
+          <PlanEstudio/>
           </SwiperSlide>
 
           <div ref={progressCircle} style={styles.progressCircle}>
