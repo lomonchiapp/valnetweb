@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Box, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 
-export const ActionItem = ({title, text, img}) => {
+export const ActionItem = ({title, text, img, action, state}) => {
+
     
         const styles = {
             title: {
@@ -18,7 +19,7 @@ export const ActionItem = ({title, text, img}) => {
             }
         }
   return (
-    <Grid item size={3} sx={{
+    <Grid  onClick={() => action(!state)} item size={3} sx={{
         display: 'flex',
         gap: '1rem',
         alignItems: 'center',
@@ -55,5 +56,7 @@ export const ActionItem = ({title, text, img}) => {
 ActionItem.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
+    img: PropTypes.string.isRequired,
+    action: PropTypes.func.isRequired,
+    state: PropTypes.bool.isRequired
 }

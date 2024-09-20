@@ -30,7 +30,7 @@ export const PlanConectao = () => {
     },
     header: {
       zIndex: 30,
-      paddingRight: 15,
+      paddingRight: 20,
       display: "flex",
       flexDirection: "column",
     },

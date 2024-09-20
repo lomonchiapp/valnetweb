@@ -4,8 +4,11 @@ import {tokens} from './theme';
 import { useTheme } from "@mui/material";
 import { Box } from '@mui/material';
 import { Headset } from '@phosphor-icons/react';
+import { useThemeState } from './contexts/global/useThemeState';
+import { HelpDrawer } from './components/HelpDrawer';
 
 function App() {
+  const {setNeedHelp} = useThemeState();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -36,10 +39,11 @@ function App() {
   return (
     <>
     <AppRouter />
-    <Box component={"button"} sx={styles.supportButton}>
+    <Box onClick={()=> setNeedHelp(true)} component={"button"} sx={styles.supportButton}>
       <Headset style={{marginRight: 5}} />
       Necesito Ayuda
       </Box>
+      <HelpDrawer />
     </>
   );
 }

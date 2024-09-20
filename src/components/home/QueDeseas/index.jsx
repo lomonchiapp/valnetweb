@@ -1,9 +1,14 @@
 import React from "react";
 import Grid from "@mui/material/Grid2";
 import { ActionItem } from "./ActionItem";
-import { Typography } from "@mui/material";
+import { Dialog, Typography } from "@mui/material";
+import { useThemeState } from "../../../contexts/global/useThemeState";
+import { LoginForm } from "../../forms/LoginForm";
+import { dialog } from "framer-motion/client";
 
 export const QueDeseas = () => {
+  const { setLogin, login } = useThemeState();
+
   const styles = {
     header: {
       pt: 5,
@@ -28,7 +33,12 @@ export const QueDeseas = () => {
       justifyContent: "center",
       padding: 5,
     },
-  };
+    dialog: {
+      '& .MuiDialog-paper': {
+        borderRadius: 10,
+        padding: 10,
+    },
+  }}
   return (
     <Grid sx={styles.section} container>
       <Grid item sx={styles.header} size={12}>
@@ -39,12 +49,12 @@ export const QueDeseas = () => {
           title="Paga tu factura"
           img="/queDeseas/paybill.png"
           text="Realiza tu pago desde la comodidad de tu hogar."
+          action={setLogin}
+          state={login}
         />
-        <ActionItem
-          text="Paga lo justo, por lo que realmente necesitas."
-          title="Arma tu plan"
-          img="/queDeseas/puzzle.png"
-        />
+        <Dialog sx={styles.dialog} open={login} onClose={() => setLogin(false)}>
+          <LoginForm />
+        </Dialog>
         <ActionItem
           text="Solicita un nuevo servicio a tu cuenta Valnet."
           title="Nuevo Servicio"
