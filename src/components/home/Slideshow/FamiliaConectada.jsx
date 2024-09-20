@@ -6,14 +6,15 @@ import { tokens } from "../../../theme";
 import { Drawer } from "@mui/material";
 import { PlanSwiper } from "../../PlanSwiper";
 import { planesInternet } from "../../../data/planesInternet";
+import { useThemeState } from "../../../contexts/global/useThemeState";
 
 export const FamiliaConectada = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { internetPlanSlider, setInternetPlanSlider } = useThemeState();
 
   const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
+    setInternetPlanSlider(!internetPlanSlider);
   };
 
   const styles = {
@@ -141,7 +142,7 @@ export const FamiliaConectada = () => {
           <Typography sx={styles.helperText}>Impuestos Incluidos.</Typography>
         </Box>
       </Grid2>
-      <Drawer sx={styles.drawer} open={isDrawerOpen} onClose={toggleDrawer} anchor="bottom">
+      <Drawer sx={styles.drawer} open={internetPlanSlider} onClose={toggleDrawer} anchor="bottom">
         <Grid2 container sx={{ p: 2, backgroundColor:'lightgrey' }}>
           <Grid2 item size={12}>
             <PlanSwiper plans={planesInternet} />

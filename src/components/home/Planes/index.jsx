@@ -1,16 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid2";
-import { PlanInternet } from "./PlanInternet";
+import { PlanItem } from "./PlanItem";
 import { Typography, Box } from "@mui/material";
-import { style } from "framer-motion/client";
-import { PlanInternetPromo } from "./PlanInternetPromo";
-import {tokens} from "../../../theme"
+import {tokens} from "../../../theme";
 import { useTheme } from "@mui/material";
 import { CaretRight } from "@phosphor-icons/react/dist/ssr";
+import { planesInternet } from "../../../data/planesInternet";
+import { useThemeState } from "../../../contexts/global/useThemeState";
+
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
 export const Planes = () => {
     const theme = useTheme();
+    const { internetPlanSlider, setInternetPlanSlider } = useThemeState();
     const colors = tokens(theme.palette.mode);
+    const [randomSortedPlans, setRandomSortedPlans] = useState([]);
+
+    useEffect(() => {
+      const shuffledPlans = shuffleArray([...planesInternet]);
+      const selectedPlans = shuffledPlans.slice(0, 3);
+      const sortedPlans = selectedPlans.sort((a, b) => a.price - b.price);
+      setRandomSortedPlans(sortedPlans);
+    }, []);
 
     const styles = {
         header: {
@@ -56,7 +73,7 @@ export const Planes = () => {
           justifyContent: "center",
           alignItems: "center",
           padding: 2,
-          backgroundColor: colors.blueAccent[400],
+          backgroundColor: colors.blueAccent[500],
           color: "white",
           borderRadius: 5,
           px:5,
@@ -86,13 +103,17 @@ export const Planes = () => {
       </Grid>
       <Grid sx={styles.container} item size={12}>
         <Grid sx={styles.planesContainer} item size={12}>
-        <PlanInternet title="Básico" price="995" subida="10" bajada="100" />
-        <PlanInternetPromo title="Premium" price="1,995" subida="20" bajada="200" />
-        <PlanInternet title="Plan 3" price="300" subida="30" bajada="300" />
+          {randomSortedPlans.map((plan, index) => (
+            <PlanItem
+              plan={plan}
+              key={index}
+            />
+          ))}
         </Grid>
         <Grid item sx={styles.btnContainer}>
         <Box component="button"
         sx={styles.morePlans}
+        onClick={() => setInternetPlanSlider(true)}
         >
           <Typography sx={styles.morePlansText}>
             Ver todos los planes 
