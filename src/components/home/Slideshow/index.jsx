@@ -16,7 +16,7 @@ import { FamiliaConectada } from "./FamiliaConectada";
 import { PlanConectao } from "./PlanConectao";
 import { PlanCinematica } from "./PlanCinematica";
 import { PlanEstudio } from "./PlanEstudio";
-
+ 
 const styles = {
   Slider: {
     backgroundColor: 'grey',

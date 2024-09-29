@@ -6,16 +6,26 @@ import { tokens } from "../../../theme";
 import { Drawer } from "@mui/material";
 import { PlanSwiper } from "../../PlanSwiper";
 import { planesInternet } from "../../../data/planesInternet";
+import {useSolicitudState} from "../../../contexts/global/useSolicitudState"
+import {AppDialog} from "@/components/AppDialog";
+import {Solicitud} from "@/components/forms/Solicitud";
 
 export const PlanConectao = () => {
+  const {selectedPlan, setSelectedPlan, newSolicitud, setNewSolicitud} = useSolicitudState();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const planConectao = planesInternet.find((plan) => plan.name === "Conectao");
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  const handleSolicitud = () => {
+    setSelectedPlan(planConectao)
+    setNewSolicitud(true)
+  }
   const styles = {
     slide: {
       backgroundImage: "url('/slideshow/planConectao/bg.jpg')",
@@ -122,6 +132,7 @@ export const PlanConectao = () => {
     },
   };
 
+
   return (
     <Grid2 container sx={styles.slide}>
       <Grid2 sx={styles.header}>
@@ -135,9 +146,21 @@ export const PlanConectao = () => {
           Descubre nuestro plan<span>Conectao'</span>{" "}
         </Typography>
         <Box sx={styles.btnContainer}>
-          <Button onClick={() => toggleDrawer()} sx={styles.btnSecondary}>
-            Ver Planes
+          <Button onClick={() => handleSolicitud()} sx={styles.btnSecondary}>
+            SOLICÍTALO AHORA
           </Button>
+          {/* Form Dialog */}
+          <AppDialog
+          title={`Nueva Solicitud - Plan ${selectedPlan?.name}`}
+            open={newSolicitud}
+            setOpen={setNewSolicitud}
+            plan={selectedPlan}
+            onClose={() => setNewSolicitud(false)}
+          >
+            <Solicitud/>
+          </AppDialog>
+
+
           <Typography sx={styles.helperText}>Impuestos Incluidos.</Typography>
         </Box>
       </Grid2>

@@ -1,12 +1,8 @@
-
-import { useState, useEffect } from 'react'
-import {Link } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { useState, useEffect } from "react";
+import { useThemeState } from "@/contexts/global/useThemeState";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,69 +10,101 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
-import { ChevronDown, Menu } from 'lucide-react'
+} from "@/components/ui/navigation-menu";
+import { ChevronDown, Menu } from "lucide-react";
+import { AppDialog } from "@/components/AppDialog";
+import { ComingSoon } from "@/components/valnetv/ComingSoon";
 
 // Logo Component
 const Logo = ({ isScrolled }: { isScrolled: boolean }) => (
   <Link to="/" className="flex items-center space-x-2">
-    <img src={isScrolled ? "/logo.png" : "/logo-white.png"} alt="Logo" className="h-10" />
+    <img
+      src={isScrolled ? "/logo.png" : "/logo-white.png"}
+      alt="Logo"
+      className="h-10"
+    />
   </Link>
-)
+);
 
 // Internet Submenu Component
-const InternetSubmenu = () => (
-  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-    <li className="row-span-3">
-      <NavigationMenuLink asChild>
-        <a
-          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-          href="/"
-        >
-          <div className="mb-2 mt-4 text-lg font-medium">Planes de Internet</div>
-          <p className="text-sm leading-tight text-muted-foreground">
-            Descubre nuestros planes de internet para tu hogar o negocio
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-          href="/"
-        >
-          <div className="text-sm font-medium leading-none">Residencial</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            Internet de alta velocidad sin restricciones.
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-          href="/"
-        >
-          <div className="text-sm font-medium leading-none">Negocios</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            Soluciones confiables para tu negocio
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  </ul>
-)
+const InternetSubmenu = () => {
+  const { setInternetPlanSlider } = useThemeState();
+
+  const handleOpenSlider = (e: any) => {
+    e.preventDefault();
+    setInternetPlanSlider(true);
+  };
+
+  return (
+    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+      <li className="row-span-3">
+        <NavigationMenuLink asChild>
+          <a
+            onClick={handleOpenSlider}
+            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+            href="#"
+          >
+            <div className="mb-2 mt-4 text-lg font-medium">
+              Planes de Internet
+            </div>
+            <p className="text-sm leading-tight text-muted-foreground">
+              Descubre nuestros planes de internet para tu hogar o negocio
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+            href="/"
+          >
+            <div className="text-sm font-medium leading-none">Residencial</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              Internet de alta velocidad sin restricciones.
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+            href="/"
+          >
+            <div className="text-sm font-medium leading-none">Negocios</div>
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              Soluciones confiables para tu negocio
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    </ul>
+  );
+};
 
 // Nav Items Component
-const NavItems = ({ isScrolled, isMobile = false }: { isScrolled: boolean, isMobile?: boolean }) => {
+const NavItems = ({
+  isScrolled,
+  isMobile = false,
+}: {
+  isScrolled: boolean;
+  isMobile?: boolean;
+}) => {
+  const { setValneTV, valneTV } = useThemeState();
   const itemClass = isMobile
     ? "text-lg font-semibold"
-    : `text-sm font-medium ml-5 ${isScrolled ? 'text-primary' : 'text-white'}`
-  const megaMenuItemClass = isMobile 
-  ? 'text-lg font-semibold' 
-  : `border-b-2 border-orange-500 bg-transparent ${isScrolled ? 'text-primary' : 'text-white'}`
+    : `text-sm font-medium ml-5 ${isScrolled ? "text-primary" : "text-white"}`;
+  const megaMenuItemClass = isMobile
+    ? "text-lg font-semibold"
+    : `border-b-2 border-orange-500 bg-transparent ${
+        isScrolled ? "text-primary" : "text-white"
+      }`;
+
+  const handleClickMenuItem = (e: any) => {
+    e.preventDefault();
+    setValneTV(true)
+  };
 
   return (
     <>
@@ -97,9 +125,14 @@ const NavItems = ({ isScrolled, isMobile = false }: { isScrolled: boolean, isMob
         )}
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink href="/" className={itemClass}>
+        <NavigationMenuLink
+          href="#"
+          onClick={handleClickMenuItem}
+          className={itemClass}
+        >
           ValneTV
         </NavigationMenuLink>
+        <ComingSoon />
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink href="/" className={itemClass}>
@@ -112,8 +145,8 @@ const NavItems = ({ isScrolled, isMobile = false }: { isScrolled: boolean, isMob
         </NavigationMenuLink>
       </NavigationMenuItem>
     </>
-  )
-}
+  );
+};
 
 // Desktop Nav Component
 const DesktopNav = ({ isScrolled }: { isScrolled: boolean }) => (
@@ -123,9 +156,9 @@ const DesktopNav = ({ isScrolled }: { isScrolled: boolean }) => (
         <NavItems isScrolled={isScrolled} />
       </NavigationMenuList>
     </NavigationMenu>
-    <Button color={isScrolled ? 'orange-500' : 'orange-500'}>Mi Valnet</Button>
+    <Button color={isScrolled ? "orange-500" : "orange-500"}>Mi Valnet</Button>
   </div>
-)
+);
 
 // Mobile Nav Component
 const MobileNav = ({ isScrolled }: { isScrolled: boolean }) => (
@@ -133,7 +166,9 @@ const MobileNav = ({ isScrolled }: { isScrolled: boolean }) => (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Menu className={`h-6 w-6 ${isScrolled ? 'text-primary' : 'text-white'}`} />
+          <Menu
+            className={`h-6 w-6 ${isScrolled ? "text-primary" : "text-white"}`}
+          />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
@@ -149,25 +184,25 @@ const MobileNav = ({ isScrolled }: { isScrolled: boolean }) => (
       </SheetContent>
     </Sheet>
   </div>
-)
+);
 
 // Main NavMenu Component
 export const NavBar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -178,5 +213,5 @@ export const NavBar = () => {
         </nav>
       </div>
     </header>
-  )
-}
+  );
+};

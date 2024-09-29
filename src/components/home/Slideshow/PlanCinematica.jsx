@@ -6,6 +6,7 @@ import { tokens } from "../../../theme";
 import { Drawer } from "@mui/material";
 import { PlanSwiper } from "../../PlanSwiper";
 import { planesInternet } from "../../../data/planesInternet";
+import {useSelectedPlan} from "../../../contexts/global/useSelectedPlan"; 
 
 export const PlanCinematica = () => {
   const theme = useTheme();

@@ -24,7 +24,7 @@ export const Planes = () => {
 
     useEffect(() => {
       const shuffledPlans = shuffleArray([...planesInternet]);
-      const selectedPlans = shuffledPlans.slice(0, 3);
+      const selectedPlans = shuffledPlans.slice(0, 4);
       const sortedPlans = selectedPlans.sort((a, b) => a.price - b.price);
       setRandomSortedPlans(sortedPlans);
     }, []);

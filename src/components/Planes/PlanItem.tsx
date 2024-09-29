@@ -8,6 +8,7 @@ import { PlanSwiper } from "../PlanSwiper";
 import { useSelectedPlan } from "@/contexts/global/useSelectedPlan";
 import {AppDialog} from '@/components/AppDialog'
 import {Solicitud} from '@/components/forms/Solicitud'
+import { useSolicitudState } from "@/contexts/global/useSolicitudState";
 
 interface PlanItemProps {
   plan: PlanInternet;
@@ -15,8 +16,8 @@ interface PlanItemProps {
 
 export const PlanItem: React.FC<PlanItemProps> = ({ plan }) => {
   const theme = useTheme();
-  const { setSelectedPlan, selectedPlan } = useSelectedPlan();
-  const [newSolicitud, setNewSolicitud] = useState(false);
+  const { setSelectedPlan, selectedPlan, newSolicitud, setNewSolicitud } = useSolicitudState();
+
   const colors = tokens(theme.palette.mode);
   const styles = {
     itemContainer: {

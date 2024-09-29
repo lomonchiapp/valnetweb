@@ -3,12 +3,15 @@ import { User, PlanInternet } from '../../types';
 
 interface SolicitudState {
     user: User;
-    plan: PlanInternet;
+    newSolicitud: boolean;
+    selectedPlan: PlanInternet | undefined;
     setUser: (user: User) => void;
-    setPlan: (plan: PlanInternet) => void;
-    }
+    setSelectedPlan: (selectedPlan: PlanInternet) => void;
+    setNewSolicitud: (newSolicitud: boolean) => void;
+}
 
 export const useSolicitudState =  create<SolicitudState>((set) => ({
+    newSolicitud: false,
     user: {
         id: 0,
         nombre: "",
@@ -22,17 +25,8 @@ export const useSolicitudState =  create<SolicitudState>((set) => ({
         cedula: "",
         role: 'cliente',
         },
-    plan: {
-        id: 0,
-        type: "",
-        name: "",
-        price: 0,
-        download: 0,
-        upload: 0,
-        description: "",
-        isActive: false,
-        isPromoted: false,
-        },
+    selectedPlan: undefined,
+    setNewSolicitud: (newSolicitud) => set({newSolicitud}),
     setUser: (user) => set({user}),
-    setPlan: (plan) => set({plan}),
+    setSelectedPlan: (selectedPlan) => set({selectedPlan}),
     }));
