@@ -27,6 +27,7 @@ import { newUser } from "@/hooks/users/newUser";
 import { newUsuario } from "@/api/users/newUsuario";
 import { ConfirmCedula } from "./Steps/ConfirmCedula";
 import { CodigoAcceso } from "./Steps/CodigoAcceso";
+import { useNewUserState } from "@/contexts/global/useNewUserState";
 const steps = [
   "Confirme su identidad",
   "Información Personal",
@@ -36,7 +37,9 @@ const steps = [
 ];
 
 export const Solicitud = () => {
-  const { user } = useSolicitudState();
+  const { 
+    cedula, correo, nombre, telefono, movil, password, direccion_principal, position, 
+   } = useNewUserState();
 
   const [activeStep, setActiveStep] = useState(0);
   const [cedulaIsValid, setCedulaIsValid] = useState<boolean | null>(false);
@@ -46,43 +49,42 @@ export const Solicitud = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleNext = () => {
-    const digitCount = user.cedula.replace(/[^0-9]/g, "").length;
+    const digitCount = cedula.replace(/[^0-9]/g, "").length;
 
     if (activeStep === 0 && digitCount === 11 && cedulaIsValid) {
       setErrorMessage(null);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (
       activeStep === 1 &&
-      user.nombre &&
-      (user.telefono || user.movil)
+      nombre &&
+      (telefono || movil)
     ) {
       setErrorMessage(null);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (
       activeStep === 2 &&
-      user.password &&
-      user.password === confirmedPassword
+      password &&
+      password === confirmedPassword
     ) {
       setErrorMessage(null);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (
       activeStep === 2 &&
-      (!user.password || user.password !== confirmedPassword)
+      (!password || password !== confirmedPassword)
     ) {
       setErrorMessage(
         "Favor asegúrese de que el código de acceso esté lleno y coincida."
       );
     } else if (
       activeStep === 3 &&
-      user.lat &&
-      user.lng &&
-      user.direccion_principal
+      position &&
+      direccion_principal
     ) {
       setErrorMessage(null);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (
       activeStep === 3 &&
-      (!user.lat || !user.lng || !user.direccion_principal)
+      (!position || !direccion_principal)
     ) {
       setErrorMessage(
         "Recuerda que necesitamos una ubicación para poder continuar."
@@ -109,12 +111,12 @@ export const Solicitud = () => {
   const handleFinish = async () => {
     const data = {
       token: import.meta.env.VITE_API_TOKEN,
-      nombre: user.nombre,
-      cedula: user.cedula,
-      correo: user.correo,
-      direccion_principal: user.direccion_principal,
-      telefono: user.telefono,
-      movil: user.telefono,
+      nombre: nombre,
+      cedula: cedula,
+      correo: correo,
+      direccion_principal: direccion_principal,
+      telefono: telefono,
+      movil: movil,
       notas: "Hola estoy interesando en el servicio ..", // Example note
       fecha_instalacion: new Date().toISOString(),
     };

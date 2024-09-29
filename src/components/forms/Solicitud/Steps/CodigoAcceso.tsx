@@ -4,6 +4,7 @@ import { Typography, FormControl, TextField, Button, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { z } from "zod";
 import { X } from "@phosphor-icons/react";
+import { useNewUserState } from "@/contexts/global/useNewUserState";
 
 // Define password validation schema using zod
 const passwordSchema = z
@@ -15,7 +16,7 @@ type CodigoAccesoProps = {
 };  
 
 export const CodigoAcceso: FC<CodigoAccesoProps> = ({confirmedPassword, setConfirmedPassword}) => {
-  const { user, setUser } = useSolicitudState();
+  const { password, setPassword} = useNewUserState();
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmedPassword, setShowConfirmedPassword] =
@@ -36,10 +37,10 @@ export const CodigoAcceso: FC<CodigoAccesoProps> = ({confirmedPassword, setConfi
   };
 
   useEffect(() => {
-    if (user.password) {
-      validatePassword(user.password);
+    if (password) {
+      validatePassword(password);
     }
-  }, [user.password]);
+  }, [password]);
 
   return (
     <Grid sx={{ display: "flex" }} container spacing={2}>
@@ -64,8 +65,8 @@ export const CodigoAcceso: FC<CodigoAccesoProps> = ({confirmedPassword, setConfi
           <TextField
             type="password"
             label="Código de Acceso"
-            value={user.password || ""}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            value={password || ""}
+            onChange={(e) => setPassword(e.target.value)}
             error={!!passwordError}
             helperText={passwordError}
             required
@@ -84,9 +85,9 @@ export const CodigoAcceso: FC<CodigoAccesoProps> = ({confirmedPassword, setConfi
             label="Confirmar Código de Acceso"
             value={confirmedPassword || ""}
             onChange={(e) => setConfirmedPassword(e.target.value)}
-            error={confirmedPassword !== user.password}
+            error={confirmedPassword !== password}
             helperText={
-              confirmedPassword !== user.password && !!user.password
+              confirmedPassword !== password && !!password
                 ? "Los códigos no coinciden."
                 : ""
             }

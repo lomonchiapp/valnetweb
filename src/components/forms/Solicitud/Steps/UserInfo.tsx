@@ -15,11 +15,22 @@ import { useSolicitudState } from "../../../../contexts/global/useSolicitudState
 import { FC } from "react";
 //Mask
 import InputMask from "react-input-mask";
+import { useNewUserState } from "@/contexts/global/useNewUserState";
 
 //props
 
 export const CustomerInfo = () => {
-  const { user, setUser } = useSolicitudState();
+  const {
+    correo,
+    setCorreo,
+    movil,
+    nombre,
+    setNombre,
+    cedula,
+    telefono,
+    setTelefono,
+    setMovil,
+  } = useNewUserState();
   const [confirmedPassword, setConfirmedPassword] = React.useState<
     string | null
   >(null);
@@ -29,28 +40,19 @@ export const CustomerInfo = () => {
     return re.test(email);
   };
 
-  useEffect(() => {
-    if (user.correo) {
-      if (!validateEmail(user.correo)) {
-        setUser({ ...user, correo: "" });
-      }
-    }
-  }, [user.correo]);
-
   return (
     <Grid container spacing={2}>
       <Grid
         size={{
           xs: 12,
           md: 12,
-        }}>
-          <Box sx={styles.cedulaBox}>
-            <Typography sx={styles.cedulaLabel}>Cédula Verificada</Typography>
-            <Typography sx={styles.cedulaText}>
-              {user.cedula}
-            </Typography>
-          </Box>
-        </Grid>
+        }}
+      >
+        <Box sx={styles.cedulaBox}>
+          <Typography sx={styles.cedulaLabel}>Cédula Verificada</Typography>
+          <Typography sx={styles.cedulaText}>{cedula}</Typography>
+        </Box>
+      </Grid>
       <Grid
         size={{
           xs: 12,
@@ -61,8 +63,8 @@ export const CustomerInfo = () => {
           <TextField
             label="Nombre Completo"
             required
-            value={user.nombre}
-            onChange={(e) => setUser({ ...user, nombre: e.target.value })}
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
           />
         </FormControl>
       </Grid>
@@ -75,8 +77,8 @@ export const CustomerInfo = () => {
         <FormControl fullWidth>
           <TextField
             label="Correo Electrónico / Email"
-            value={user.correo}
-            onChange={(e) => setUser({ ...user, correo: e.target.value })}
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
           />
         </FormControl>
       </Grid>
@@ -89,8 +91,8 @@ export const CustomerInfo = () => {
         <FormControl fullWidth>
           <InputMask
             mask="999-999-9999"
-            value={user.telefono}
-            onChange={(e) => setUser({ ...user, telefono: e.target.value })}
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
           >
             {(inputProps: any) => (
               <TextField {...inputProps} label="Teléfono" />
@@ -107,27 +109,26 @@ export const CustomerInfo = () => {
         <FormControl fullWidth>
           <InputMask
             mask="999-999-9999"
-            value={user.movil}
-            onChange={(e) => setUser({ ...user, movil: e.target.value })}
+            value={movil}
+            onChange={(e) => setMovil(e.target.value)}
           >
             {(inputProps: any) => (
               <TextField {...inputProps} label="Movil / WhatsApp" />
             )}
           </InputMask>
         </FormControl>
-        
       </Grid>
-      <FormHelperText sx={{
-
-        backgroundColor: '#efefef',
-        padding: '0.2rem',
-        borderRadius: '5px',
-        justifyContent: 'center',
-        alignItems: 'center',
-      
-      }}>
-         Los Campos con (*) son obligatorios para avanzar.
-        </FormHelperText>
+      <FormHelperText
+        sx={{
+          backgroundColor: "#efefef",
+          padding: "0.2rem",
+          borderRadius: "5px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Los Campos con (*) son obligatorios para avanzar.
+      </FormHelperText>
     </Grid>
   );
 };

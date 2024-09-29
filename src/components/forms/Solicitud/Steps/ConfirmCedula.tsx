@@ -21,6 +21,7 @@ import { confirmCedula } from "@/api/cedula/confirmCedula";
 import ReactInputMask from "react-input-mask";
 import { text } from "stream/consumers";
 import { Check } from "@phosphor-icons/react";
+import { useNewUserState } from "@/contexts/global/useNewUserState";
 
 
 
@@ -30,16 +31,18 @@ type ConfirmCedulaProps = {
 };
 
 export const ConfirmCedula: FC<ConfirmCedulaProps> = ({ setIsValid, isValid }) => {
-  const { user, setUser } = useSolicitudState();
+  const { cedula, setCedula } = useNewUserState();
+
   const [cleanCedula, setCleanCedula] = useState<string>("");
-  const isCedulaEmpty = (cedula) => {
+
+  const isCedulaEmpty = (cedula: string) => {
     // Check if the cedula contains only mask characters
     return !cedula || cedula.replace(/[^0-9]/g, '').length === 0;
   };
 
 
   useEffect(() => {
-    const cleaned = user.cedula.replace(/[^0-9]/g, '');
+    const cleaned = cedula.replace(/[^0-9]/g, '');
     setCleanCedula(cleaned);
 
     if (cleaned.length === 11) {
@@ -47,7 +50,7 @@ export const ConfirmCedula: FC<ConfirmCedulaProps> = ({ setIsValid, isValid }) =
     } else {
       setIsValid(null);
     }
-  }, [user.cedula]);
+  }, [cedula]);
 
   const validateCedula = async (cedula: string) => {
     const response = await confirmCedula(cedula);
@@ -74,8 +77,8 @@ export const ConfirmCedula: FC<ConfirmCedulaProps> = ({ setIsValid, isValid }) =
         <FormControl fullWidth>
         <ReactInputMask
       mask="999-9999999-9"
-      value={user.cedula}
-      onChange={(e) => setUser({ ...user, cedula: e.target.value })}
+      value={cedula}
+      onChange={(e) => setCedula(e.target.value)}
     >
       {(inputProps) => (
         <div style={styles.inputContainer}>
@@ -86,7 +89,7 @@ export const ConfirmCedula: FC<ConfirmCedulaProps> = ({ setIsValid, isValid }) =
             required
             label="Cédula"
           />
-          {!isCedulaEmpty(user.cedula) && cleanCedula.length === 11 ? (
+          {!isCedulaEmpty(cedula) && cleanCedula.length === 11 ? (
                   isValid  ? (
                     <Box sx={styles.validBox}>
                       <Check size={20} />

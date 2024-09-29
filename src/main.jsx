@@ -15,7 +15,6 @@ const Main = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-        
         <App />
         </BrowserRouter>
       </ThemeProvider>

@@ -3,11 +3,10 @@ export interface User {
     nombre: string;
     correo: string;
     password: string;
-    direccion_principal: string;
     movil: string;
     telefono: string;
-    lat?: number;
-    lng?: number;
+    position?: [number, number];
+    direccion_principal?: string;
     plan?: PlanInternet;
     cedula: string;
     role: string;
@@ -25,6 +24,8 @@ export interface Solicitud {
     user: User;
     plan?: PlanInternet;
     service?: Service;
+    position: [number, number];
+    direccion_principal: string;
     createdAt: Date;
     status: string;
 }
