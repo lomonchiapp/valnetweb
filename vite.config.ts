@@ -12,12 +12,7 @@ export default defineConfig({
   },
 
   server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080/http://38.57.232.66:3031',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
+    host: '0.0.0.0', // Escuchar en todas las interfaces
+    port: 5173, // Puerto en el que se ejecuta Vite (puedes cambiarlo si lo deseas)
   },
 });
